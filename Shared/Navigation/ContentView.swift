@@ -8,30 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage ("selectedTab") var selectedTab: Tab = .home
+    @AppStorage("selectedTab") var selectedTab: Tab = .home
     
     var body: some View {
         ZStack(alignment: .bottom) {
-
             
-            Group {
-                switch selectedTab {
-                case .home:
-                    HomeView()
-                case .explore:
-                    AccountView()
-                case .notifications:
-                    AccountView()
-                case .library:
-                    AccountView()
-                }
+            switch selectedTab {
+            case .home:
+                HomeView()
+            case .explore:
+                AccountView()
+            case .notifications:
+                AccountView()
+            case .library:
+                AccountView()
             }
-            .frame(maxWidth: .infinity,maxHeight: .infinity)
-           
-
+            
             TabBar()
         }
-
+        .safeAreaInset(edge: .bottom) {
+            Color.clear.frame(height: 44)
+        }
     }
 }
 
@@ -41,6 +38,7 @@ struct ContentView_Previews: PreviewProvider {
             ContentView()
             ContentView()
                 .preferredColorScheme(.dark)
+                .previewDevice("iPhone 13 mini")
         }
     }
 }

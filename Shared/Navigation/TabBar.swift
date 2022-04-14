@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBar: View {
-    @AppStorage ("selectedTab") var selectedTab: Tab = .home
+    @AppStorage("selectedTab") var selectedTab: Tab = .home
     @State var color: Color = .teal
     @State var tabItemWidth: CGFloat = 0
     
@@ -30,14 +30,14 @@ struct TabBar: View {
         .frame(maxHeight: .infinity, alignment: .bottom)
         .ignoresSafeArea()
     }
+    
     var buttons: some View {
         ForEach(tabItems) { item in
             Button {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.7 )) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                     selectedTab = item.tab
                     color = item.color
                 }
-                
             } label: {
                 VStack(spacing: 0) {
                     Image(systemName: item.icon)
@@ -47,25 +47,23 @@ struct TabBar: View {
                     Text(item.text)
                         .font(.caption2)
                         .lineLimit(1)
-                    
                 }
                 .frame(maxWidth: .infinity)
             }
-            .foregroundStyle(selectedTab == item.tab ? .primary : .secondary)//выделение текущей позиции в меню
+            .foregroundStyle(selectedTab == item.tab ? .primary : .secondary)
             .blendMode(selectedTab == item.tab ? .overlay : .normal)
             .overlay(
                 GeometryReader { proxy in
 //                            Text("\(proxy.size.width)")
                     Color.clear.preference(key: TabPreferenceKey.self, value: proxy.size.width)
-                    
                 }
             )
-            .onPreferenceChange(TabPreferenceKey.self){
-                value in
+            .onPreferenceChange(TabPreferenceKey.self) { value in
                 tabItemWidth = value
             }
         }
     }
+    
     var background: some View {
         HStack {
             if selectedTab == .library { Spacer() }

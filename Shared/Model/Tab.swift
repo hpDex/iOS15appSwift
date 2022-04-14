@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabItem: Identifiable{
+struct TabItem: Identifiable {
     var id = UUID()
     var text: String
     var icon: String
@@ -29,8 +29,7 @@ enum Tab: String {
     case library
 }
 
-
-struct TabPreferenceKey: PreferenceKey{
+struct TabPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()

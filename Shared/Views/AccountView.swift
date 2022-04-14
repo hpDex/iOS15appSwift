@@ -19,9 +19,8 @@ struct AccountView: View {
                 menu
                 
                 links
-
             }
-            .listStyle(.automatic)
+            .listStyle(.insetGrouped)
             .navigationTitle("Account")
         }
     }
@@ -38,60 +37,59 @@ struct AccountView: View {
                 .background(
                     HexagonView()
                         .offset(x: -50, y: -100)
-            )
-                .background(
-                BlobView()
-                    .offset(x: 200, y: 0)
-                    .scaleEffect(0.6)
                 )
-            Text("Denis")
+                .background(
+                    BlobView()
+                        .offset(x: 200, y: 0)
+                        .scaleEffect(0.6)
+                )
+            Text("Meng To")
                 .font(.title.weight(.semibold))
             HStack {
                 Image(systemName: "location")
-                    .imageScale(.small)
-                Text("Russia")
+                    .imageScale(.large)
+                Text("Canada")
                     .foregroundColor(.secondary)
             }
-            
         }
         .frame(maxWidth: .infinity)
         .padding()
     }
+    
     var menu: some View {
         Section {
-            NavigationLink (destination: HomeView()) {
+            NavigationLink(destination: HomeView()) {
                 Label("Settings", systemImage: "gear")
             }
-            NavigationLink{ Text("Billing")} label: {
+            NavigationLink { Text("Billing") } label: {
                 Label("Billing", systemImage: "creditcard")
             }
-            NavigationLink{HomeView()} label: {
+            NavigationLink { HomeView() } label: {
                 Label("Help", systemImage: "questionmark")
             }
         }
-            .accentColor(.primary)
-                .listRowSeparator(.hidden)
-              .listRowSeparatorTint(.blue)
+        .accentColor(.primary)
+        .listRowSeparatorTint(.blue)
+        .listRowSeparator(.hidden)
     }
     
-    var links: some View{
+    var links: some View {
         Section {
             if !isDeleted {
-                Link(destination: URL(string: "https://systema24.com")!) {
+                Link(destination: URL(string: "https://apple.com")!) {
                     HStack {
                         Label("Website", systemImage: "house")
                         Spacer()
                         Image(systemName: "link")
-                        .foregroundColor(.secondary)
+                            .foregroundColor(.secondary)
                     }
                 }
-                .swipeActions(edge:.leading , allowsFullSwipe: false) {
-                    Button(action: {isDeleted = true }) {
+                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                    Button(action: { isDeleted = true }) {
                         Label("Delete", systemImage: "trash")
                     }
                     .tint(.red)
                     pinButton
-
                 }
             }
             Link(destination: URL(string: "https://youtube.com")!) {
@@ -99,10 +97,10 @@ struct AccountView: View {
                     Label("YouTube", systemImage: "tv")
                     Spacer()
                     Image(systemName: "link")
-                    .foregroundColor(.secondary)
+                        .foregroundColor(.secondary)
                 }
             }
-            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            .swipeActions {
                 pinButton
             }
         }
@@ -110,14 +108,13 @@ struct AccountView: View {
         .listRowSeparator(.hidden)
     }
     
-    var pinButton: some View{
-        Button{ isPinned.toggle() } label: {
-            if isPinned{
+    var pinButton: some View {
+        Button { isPinned.toggle() } label: {
+            if isPinned {
                 Label("Unpin", systemImage: "pin.slash")
-            } else{
+            } else {
                 Label("Pin", systemImage: "pin")
             }
-            
         }
         .tint(isPinned ? .gray : .yellow)
     }
