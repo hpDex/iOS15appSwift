@@ -43,12 +43,13 @@ struct AccountView: View {
                         .offset(x: 200, y: 0)
                         .scaleEffect(0.6)
                 )
-            Text("Meng To")
+            Text("Denis Filippov")
                 .font(.title.weight(.semibold))
+                .padding()
             HStack {
                 Image(systemName: "location")
                     .imageScale(.large)
-                Text("Canada")
+                Text("Barbados")
                     .foregroundColor(.secondary)
             }
         }
@@ -58,13 +59,14 @@ struct AccountView: View {
     
     var menu: some View {
         Section {
+//            страница назначения
             NavigationLink(destination: HomeView()) {
                 Label("Settings", systemImage: "gear")
             }
-            NavigationLink { Text("Billing") } label: {
+            NavigationLink { HomeView() } label: {
                 Label("Billing", systemImage: "creditcard")
             }
-            NavigationLink { HomeView() } label: {
+            NavigationLink { Text("Help") } label: {
                 Label("Help", systemImage: "questionmark")
             }
         }
@@ -72,6 +74,10 @@ struct AccountView: View {
         .listRowSeparatorTint(.blue)
         .listRowSeparator(.hidden)
     }
+    
+    
+    
+//    кнопка удаления
     
     var links: some View {
         Section {
@@ -84,6 +90,7 @@ struct AccountView: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                //            отработка свайпа
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button(action: { isDeleted = true }) {
                         Label("Delete", systemImage: "trash")
@@ -100,13 +107,20 @@ struct AccountView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            .swipeActions {
+//            отработка свайпа
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button(action: { isDeleted = true }) {
+                    Label("Delete", systemImage: "trash")
+                }
+                .tint(.red)
                 pinButton
             }
         }
         .accentColor(.primary)
         .listRowSeparator(.hidden)
     }
+    
+//    кнопка закрепления
     
     var pinButton: some View {
         Button { isPinned.toggle() } label: {

@@ -21,7 +21,7 @@ struct ContentView: View {
             case .notifications:
                 AccountView()
             case .library:
-                AccountView()
+                HomeView()
             }
             
             TabBar()

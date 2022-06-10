@@ -27,11 +27,11 @@ struct CourseView: View {
                 Image(systemName: "xmark")
                     .font(.body.weight(.bold))
                     .foregroundColor(.secondary)
-                    .padding(8)
+                    .padding(10)
                     .background(.ultraThinMaterial, in: Circle())
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(20)
+            .padding(30)
             .ignoresSafeArea()
         }
     }
@@ -81,7 +81,7 @@ struct CourseView: View {
                         .padding(8)
                         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                         .strokeStyle(cornerRadius: 18)
-                    Text("Taught by Meng To")
+                    Text("Taught by Filippov D.V.")
                         .font(.footnote)
                 }
             }
